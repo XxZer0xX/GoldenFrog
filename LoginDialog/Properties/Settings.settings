@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LoginDialog.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="UNHANDLEDEXC" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">you have incountered an unhandled exception:  {0}</Value>
+    </Setting>
+    <Setting Name="WINDOWTITLE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Golden Frog Login</Value>
+    </Setting>
+    <Setting Name="AUTHSUCCESS" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Login Successful</Value>
+    </Setting>
+    <Setting Name="AUTHFAILED" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Authentication Failed!</Value>
+    </Setting>
+    <Setting Name="LOGINBUTTONTEXT" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Login</Value>
+    </Setting>
+    <Setting Name="RESETBUTTONTEXT" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Reset</Value>
+    </Setting>
+    <Setting Name="DATAPATH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data</Value>
+    </Setting>
+    <Setting Name="PASSWORD" Type="System.String" Scope="User">
+      <Value Profile="(Default)">nimda</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
