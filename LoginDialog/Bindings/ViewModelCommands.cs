@@ -4,7 +4,7 @@
 
     using System;
     using System.Linq;
-    using System.Windows.Controls;
+    using System.Security;
     using System.Windows.Input;
     using Cryptogrophy;
     using Models;
@@ -52,24 +52,22 @@
         private void resetButtonCommandAction(object obj)
         {
             Username = null;
-            if (obj == null)
-                return;
-            var passBox = (PasswordBox) obj;
-            passBox.Password = null;
-            ;
+            Password = null;
+            _authenticationSuccess = false;
         }
 
         private void loginButtonCommandAction(object obj)
         {
-            var passBox = (PasswordBox) obj;
             var requestingUser =
                 App.UsersData.Users.FirstOrDefault(
                     user => user.Username.Equals(Username, StringComparison.CurrentCultureIgnoreCase));
 
             if (requestingUser == null)
                 displayLoginFailure();
-            else if (hashIsAuthenicated(requestingUser, passBox.Password))
+            else if (hashIsAuthenicated(requestingUser, Password))
+            {
                 displayLoginSuccess();
+            }
             else
                 displayLoginFailure();
         }
@@ -81,12 +79,12 @@
         private bool resetButtonCommandPredicate(object obj)
         {
             // Because we are not binding to Password we can not add it to the CanExecute predicate.
-            return (!string.IsNullOrEmpty(Username));
+            return (!string.IsNullOrEmpty(Username) || Password != null);
         }
 
         private bool loginButtonCommandPredicate(object obj)
         {
-            return (!string.IsNullOrEmpty(Username));
+            return (!string.IsNullOrEmpty(Username) && !_authenticationSuccess);
         }
 
         #endregion
@@ -96,6 +94,8 @@
         private void displayLoginSuccess()
         {
             AuthenticationMessage = AuthenticationSuccessMessage;
+            Password = null;
+            _authenticationSuccess = true;
         }
 
         private void displayLoginFailure()
@@ -106,9 +106,10 @@
             AuthenticationFailed = false;
         }
 
-        private bool hashIsAuthenicated(User requestingUser, string password)
+        private bool hashIsAuthenicated(User requestingUser, SecureString password)
         {
-            return PasswordCryptography.ValidatePassword(password, requestingUser.Hash);
+            using (password)
+                return PasswordCryptography.ValidatePassword(password, requestingUser.Hash);
         }
 
         #endregion

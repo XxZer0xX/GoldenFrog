@@ -21,14 +21,20 @@
     {
         private const string _defaultUserName = "admin";
         private string _dataPath;
+
+        public App()
+        {
+            DispatcherUnhandledException += onDispatcherUnhandledException;
+            loadUserData();
+        }
+
         public static UserDataSet UsersData { get; set; }
 
         /// <summary>
         ///     DataPath for Users stored
-        /// 
         ///     The default user
-        ///         Username: admin
-        ///         Password: nimda
+        ///     Username: admin
+        ///     Password: nimda
         /// </summary>
         private string dataPath
         {
@@ -40,12 +46,6 @@
                             Assembly.GetExecutingAssembly().Location)
                         , Settings.Default.DATAPATH), "RegisteredUsers.xml"));
             }
-        }
-
-        public App()
-        {
-            DispatcherUnhandledException += onDispatcherUnhandledException;
-            loadUserData();
         }
 
         /// <summary>

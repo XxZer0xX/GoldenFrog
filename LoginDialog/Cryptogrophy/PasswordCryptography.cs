@@ -1,9 +1,10 @@
-﻿
-namespace LoginDialog.Cryptogrophy
+﻿namespace LoginDialog.Cryptogrophy
 {
     #region Referenceing
 
     using System;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Cryptography;
 
     #endregion
@@ -44,7 +45,7 @@ namespace LoginDialog.Cryptogrophy
         /// <param name="password"></param>
         /// <param name="correctHash"></param>
         /// <returns></returns>
-        public static bool ValidatePassword(string password, string correctHash)
+        public static bool ValidatePassword(SecureString password, string correctHash)
         {
             // Extract the parameters from the hash
             char[] delimiter = {':'};
@@ -53,7 +54,7 @@ namespace LoginDialog.Cryptogrophy
             var salt = Convert.FromBase64String(split[SALT_INDEX]);
             var hash = Convert.FromBase64String(split[PBKDF2_INDEX]);
 
-            var testHash = Pbkdf2(password, salt, iterations, hash.Length);
+            var testHash = Pbkdf2(DecryptStringValue(password), salt, iterations, hash.Length);
             return SlowEquals(hash, testHash);
         }
 
@@ -72,7 +73,7 @@ namespace LoginDialog.Cryptogrophy
         }
 
         /// <summary>
-        ///    Generate the PBKDF2-SHA1 hash of a password.
+        ///     Generate the PBKDF2-SHA1 hash of a password.
         /// </summary>
         private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int outputBytes)
         {
@@ -81,6 +82,20 @@ namespace LoginDialog.Cryptogrophy
                 IterationCount = iterations
             };
             return pbkdf2.GetBytes(outputBytes);
+        }
+
+        private static string DecryptStringValue(SecureString value)
+        {
+            var valuePtr = IntPtr.Zero;
+            try
+            {
+                valuePtr = Marshal.SecureStringToGlobalAllocUnicode(value);
+                return Marshal.PtrToStringUni(valuePtr);
+            }
+            finally
+            {
+                Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
+            }
         }
     }
 }

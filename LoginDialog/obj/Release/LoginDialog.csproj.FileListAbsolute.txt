@@ -1,0 +1,15 @@
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\bin\Release\LoginDialog.exe.config
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\bin\Release\LoginDialog.exe
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\bin\Release\LoginDialog.pdb
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\LoginDialog.csprojResolveAssemblyReference.cache
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\LoginWindow.g.cs
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\App.g.cs
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\LoginDialog_MarkupCompile.cache
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\LoginDialog_MarkupCompile.lref
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\LoginWindow.baml
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\LoginDialog.g.resources
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\LoginDialog.Properties.Resources.resources
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\LoginDialog.csproj.GenerateResource.Cache
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\LoginDialog.exe
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\LoginDialog\obj\Release\LoginDialog.pdb

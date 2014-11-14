@@ -8,6 +8,10 @@
 
     /// <summary>
     ///     Interaction logic for LoginWindow
+    ///     
+    ///     Note: To successfully log-in using this application
+    ///         Username: admin
+    ///         Password: nimda
     /// </summary>
     internal partial class LoginWindow
     {

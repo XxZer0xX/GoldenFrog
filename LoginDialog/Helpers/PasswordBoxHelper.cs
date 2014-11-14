@@ -2,6 +2,7 @@
 {
     #region Referenceing
 
+    using System.Security;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -13,8 +14,8 @@
     public static class PasswordBoxHelper
     {
         public static readonly DependencyProperty BoundPassword =
-            DependencyProperty.RegisterAttached("BoundPassword", typeof (string), typeof (PasswordBoxHelper),
-                new PropertyMetadata(string.Empty, OnBoundPasswordChanged));
+            DependencyProperty.RegisterAttached("BoundPassword", typeof (SecureString), typeof (PasswordBoxHelper),
+                new PropertyMetadata(null, OnBoundPasswordChanged));
 
         public static readonly DependencyProperty BindPassword = DependencyProperty.RegisterAttached(
             "BindPassword", typeof (bool), typeof (PasswordBoxHelper),
@@ -24,11 +25,12 @@
             DependencyProperty.RegisterAttached("UpdatingPassword", typeof (bool), typeof (PasswordBoxHelper),
                 new PropertyMetadata(false));
 
-        private static void OnBoundPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnBoundPasswordChanged(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs args)
         {
-            var box = d as PasswordBox;
+            var box = dependencyObject as PasswordBox;
 
-            if (d == null || !GetBindPassword(d))
+            if (dependencyObject == null || !GetBindPassword(dependencyObject))
             {
                 return;
             }
@@ -36,69 +38,70 @@
             // avoid recursive updating by ignoring the box's changed event
             box.PasswordChanged -= HandlePasswordChanged;
 
-            var newPassword = (string) e.NewValue;
+            var newPassword = (SecureString) args.NewValue;
 
             if (!GetUpdatingPassword(box))
             {
-                box.Password = newPassword;
+                box.Password = (newPassword == null) ? string.Empty : newPassword.ToString();
             }
 
             box.PasswordChanged += HandlePasswordChanged;
         }
 
-        private static void OnBindPasswordChanged(DependencyObject dp, DependencyPropertyChangedEventArgs e)
+        private static void OnBindPasswordChanged(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs args)
         {
-            var box = dp as PasswordBox;
+            var passwordBox = dependencyObject as PasswordBox;
 
-            if (box == null)
+            if (passwordBox == null)
                 return;
 
-            var wasBound = (bool) (e.OldValue);
-            var needToBind = (bool) (e.NewValue);
+            var wasBound = (bool) (args.OldValue);
+            var needToBind = (bool) (args.NewValue);
 
             if (wasBound)
-                box.PasswordChanged -= HandlePasswordChanged;
+                passwordBox.PasswordChanged -= HandlePasswordChanged;
 
             if (needToBind)
-                box.PasswordChanged += HandlePasswordChanged;
+                passwordBox.PasswordChanged += HandlePasswordChanged;
         }
 
-        private static void HandlePasswordChanged(object sender, RoutedEventArgs e)
+        private static void HandlePasswordChanged(object sender, RoutedEventArgs args)
         {
             var box = sender as PasswordBox;
             SetUpdatingPassword(box, true);
-            SetBoundPassword(box, box.Password);
+            SetBoundPassword(box, box.SecurePassword);
             SetUpdatingPassword(box, false);
         }
 
-        public static void SetBindPassword(DependencyObject dp, bool value)
+        public static void SetBindPassword(DependencyObject dependancyProperty, bool value)
         {
-            dp.SetValue(BindPassword, value);
+            dependancyProperty.SetValue(BindPassword, value);
         }
 
-        public static bool GetBindPassword(DependencyObject dp)
+        public static bool GetBindPassword(DependencyObject dependancyProperty)
         {
-            return (bool) dp.GetValue(BindPassword);
+            return (bool) dependancyProperty.GetValue(BindPassword);
         }
 
-        public static string GetBoundPassword(DependencyObject dp)
+        public static string GetBoundPassword(DependencyObject dependancyProperty)
         {
-            return (string) dp.GetValue(BoundPassword);
+            return (string) dependancyProperty.GetValue(BoundPassword);
         }
 
-        public static void SetBoundPassword(DependencyObject dp, string value)
+        public static void SetBoundPassword(DependencyObject dependancyProperty, SecureString value)
         {
-            dp.SetValue(BoundPassword, value);
+            dependancyProperty.SetValue(BoundPassword, value);
         }
 
-        private static bool GetUpdatingPassword(DependencyObject dp)
+        private static bool GetUpdatingPassword(DependencyObject dependancyProperty)
         {
-            return (bool) dp.GetValue(UpdatingPassword);
+            return (bool) dependancyProperty.GetValue(UpdatingPassword);
         }
 
-        private static void SetUpdatingPassword(DependencyObject dp, bool value)
+        private static void SetUpdatingPassword(DependencyObject dependancyProperty, bool value)
         {
-            dp.SetValue(UpdatingPassword, value);
+            dependancyProperty.SetValue(UpdatingPassword, value);
         }
     }
 }

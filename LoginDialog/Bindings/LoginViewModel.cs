@@ -2,16 +2,18 @@
 {
     #region Referenceing
 
+    using System.Security;
     using Properties;
 
     #endregion
 
     /// <summary>
-    ///     Login ViewModel, Contains Properties 
+    ///     Login ViewModel, Contains Properties
     /// </summary>
     internal sealed partial class LoginViewModel : ViewModelBase
     {
         private bool _authenticationFailed;
+        private bool _authenticationSuccess;
         private string _authenticationFailedMessage;
         private string _authenticationMessage;
         private string _authenticationSuccessMessage;
@@ -20,21 +22,21 @@
         private string _username;
         private string _windowTitle;
 
+
         #region unused
 
-        //private string _password;
-        //
-        /// the bound property for PasswordBoxHelper. If you wanted to implement the workaround. It is not in good practice to expose passwords at runtime.
-        //
-        //public string Password
-        //{
-        //    get { return _username; }
-        //    set { SetField(ref _password, value); }
-        //}
+        private SecureString _password;
+
+        public SecureString Password
+        {
+            get { return _password; }
+            set { SetField(ref _password, value); }
+        }
 
         #endregion
 
         #region  Bound Properties
+
         public bool AuthenticationFailed
         {
             get { return _authenticationFailed; }

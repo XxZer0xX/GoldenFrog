@@ -1,0 +1,6 @@
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\StringOperation\bin\Release\StringOperation.exe.config
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\StringOperation\bin\Release\StringOperation.exe
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\StringOperation\bin\Release\StringOperation.pdb
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\StringOperation\obj\Release\StringOperation.csprojResolveAssemblyReference.cache
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\StringOperation\obj\Release\StringOperation.exe
+C:\Users\TMoore\Documents\Visual Studio 2013\Projects\GoldenFrog\StringOperation\obj\Release\StringOperation.pdb
