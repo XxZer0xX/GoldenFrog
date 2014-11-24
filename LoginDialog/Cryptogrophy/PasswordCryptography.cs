@@ -48,7 +48,7 @@
         public static bool ValidatePassword(SecureString password, string correctHash)
         {
             // Extract the parameters from the hash
-            char[] delimiter = {':'};
+            char[] delimiter = { ':' };
             var split = correctHash.Split(delimiter);
             var iterations = Int32.Parse(split[ITERATION_INDEX]);
             var salt = Convert.FromBase64String(split[SALT_INDEX]);
@@ -66,9 +66,9 @@
         /// <returns></returns>
         private static bool SlowEquals(byte[] a, byte[] b)
         {
-            var diff = (uint) a.Length ^ (uint) b.Length;
+            var diff = (uint)a.Length ^ (uint)b.Length;
             for (var i = 0; i < a.Length && i < b.Length; i++)
-                diff |= (uint) (a[i] ^ b[i]);
+                diff |= (uint)(a[i] ^ b[i]);
             return diff == 0;
         }
 
@@ -77,11 +77,8 @@
         /// </summary>
         private static byte[] Pbkdf2(string password, byte[] salt, int iterations, int outputBytes)
         {
-            var pbkdf2 = new Rfc2898DeriveBytes(password, salt)
-            {
-                IterationCount = iterations
-            };
-            return pbkdf2.GetBytes(outputBytes);
+            using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt) { IterationCount = iterations })
+                return pbkdf2.GetBytes(outputBytes);
         }
 
         private static string DecryptStringValue(SecureString value)
